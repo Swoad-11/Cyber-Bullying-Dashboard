@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import Sidebar from "../../comoponents/Sidebar/Sidebar";
+import BangladeshMap from "../../comoponents/Heatmap/BangladeshMap";
 
 ChartJS.register(
   CategoryScale,
@@ -31,15 +32,55 @@ const tacticsData = {
   ],
 };
 
-const partyData = {
-  labels: ["NCP", "BNP", "Jatiya Party", "Others"],
+const partyBarData = {
+  labels: ["Awami League", "BNP", "Jatiya Party", "Others"],
   datasets: [
     {
+      label: "Female Candidates",
       data: [35, 22, 10, 8],
       backgroundColor: ["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"],
-      hoverOffset: 8,
     },
   ],
+};
+
+const partyBarOptions = {
+  indexAxis: "y", // ← This makes it horizontal
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    x: {
+      beginAtZero: true,
+    },
+  },
+};
+
+const platformData = {
+  labels: ["Facebook", "Twitter", "YouTube", "TikTok"],
+  datasets: [
+    {
+      label: "Reports",
+      data: [18, 9, 4, 2],
+      backgroundColor: ["#1877F2", "#1DA1F2", "#FF0000", "#25F4EE"],
+    },
+  ],
+};
+
+const platformOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+    },
+  },
 };
 
 export default function Dashboard() {
@@ -52,6 +93,30 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold text-center">
               Online Gender-Based Violence Against Female Election Candidates
             </h1>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="flex flex-col gap-6">
+                {/* First chart card */}
+                <div className="bg-gray-800 rounded-2xl shadow p-6">
+                  <h2 className="text-xl font-semibold mb-4 text-center">
+                    Female Candidates by Party
+                  </h2>
+                  <Bar data={partyBarData} options={partyBarOptions} />
+                </div>
+
+                {/* Second chart card */}
+                <div className="bg-gray-800 rounded-2xl shadow p-6">
+                  <h2 className="text-xl font-semibold mb-4 text-center">
+                    Violence Reports by Platform
+                  </h2>
+                  <Bar data={platformData} options={platformOptions} />
+                </div>
+              </div>
+
+              <div className="bg-gray-800 rounded-2xl shadow p-6 lg:col-span-2">
+                <BangladeshMap />
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-gray-800 rounded-2xl shadow p-4">
@@ -85,15 +150,6 @@ export default function Dashboard() {
                   <li>Candidate B - 3 Cases</li>
                   <li>Candidate C - 2 Cases</li>
                 </ul>
-              </div>
-
-              <div className="bg-gray-800 rounded-2xl shadow p-6">
-                <h2 className="text-xl font-semibold mb-4 text-center">
-                  Female Candidates by Political Party
-                </h2>
-                <div className="max-w-md mx-auto">
-                  <Doughnut data={partyData} options={{ responsive: true }} />
-                </div>
               </div>
             </div>
 
