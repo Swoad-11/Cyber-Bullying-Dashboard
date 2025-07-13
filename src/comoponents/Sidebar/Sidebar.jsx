@@ -8,7 +8,7 @@ import {
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 min-h-screen bg-gray-900 p-6 text-white">
+    <aside className="w-64 min-h-screen bg-gray-800 p-6 text-white">
       <div className="text-2xl font-bold text-green-400 mb-8">
         Election Watch
       </div>

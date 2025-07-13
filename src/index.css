@@ -1,2 +1,15 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
