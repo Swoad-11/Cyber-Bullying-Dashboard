@@ -17,6 +17,7 @@ import {
   Legend,
   Title,
 } from "chart.js";
+import TargetedCandidates from "../../comoponents/Table/TargetedCandidates";
 
 export default function Dashboard() {
   ChartJS.register(
@@ -30,60 +31,55 @@ export default function Dashboard() {
     Legend,
     Title
   );
-
   return (
-    <>
-      <div className="flex">
-        <Sidebar />
-        <main className="flex-1 bg-gray-950 text-white">
-          <div className="min-h-screen bg-gray-900 text-white p-6 space-y-6">
-            <h1 className="text-3xl font-bold text-center">
-              Online Gender-Based Violence Against Female Election Candidates
-            </h1>
+    <div className="flex min-h-screen bg-gray-900 text-white">
+      <Sidebar />
 
-            <div className="grid grid-cols-3 gap-4 h-full">
-              <div className="flex flex-col gap-4">
-                <PartyBar />
-                <CountDown />
-              </div>
-              <div className="col-span-2">
-                <BangladeshMap />
-              </div>
+      <main className="flex-1 p-6 space-y-6">
+        <h1 className="text-3xl max-[825px]:text-lg font-bold text-center">
+          Online Gender-Based Violence Against Female Election Candidates
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex flex-col gap-4">
+            <PartyBar />
+            <CountDown />
+          </div>
+          <div className="md:col-span-2">
+            <BangladeshMap />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <BullyingDoughnut />
+            <PlatformBar />
+          </div>
+          <TacticsBar />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <TargetedCandidates />
+          <div className="grid grid-cols-2 gap-2 text-center">
+            <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center">
+              <h3 className="text-lg font-semibold mb-4">
+                Actions by Government
+              </h3>
+              <p className="text-6xl max-[450px]:text-3xl font-bold text-pink-500">
+                6
+              </p>
             </div>
-
-            <div className="grid grid-cols-2 max-[850px]:grid-cols-1 gap-4 h-full">
-              <div className="grid grid-cols-2 gap-2">
-                <BullyingDoughnut className="h-full" />
-                <PlatformBar className="h-full" />
-              </div>
-              <TacticsBar />
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <div className="bg-gray-800 rounded-2xl shadow p-4">
-                <h2 className="text-xl font-semibold mb-2">
-                  Targeted Candidates
-                </h2>
-                <ul className="space-y-2 text-sm">
-                  <li>Rumeen Farhana - Comilla (Facebook)</li>
-                  <li>Tasmia Mahmood - Mymensingh (Twitter)</li>
-                  <li>Saleha Akhtar - Dhaka-19 (Twitter)</li>
-                  <li>Nusrat Jahan - Chattogram-8 (Facebook)</li>
-                  <li>Nabila Sultana - Raishahi-2 (Twitter)</li>
-                </ul>
-              </div>
-              <div className="bg-gray-800 rounded-2xl shadow p-6 text-center">
-                <h3 className="text-lg font-medium">Actions by Government</h3>
-                <p className="text-4xl font-bold text-pink-500">6</p>
-              </div>
-
-              <div className="bg-gray-800 rounded-2xl shadow p-6 text-center">
-                <h3 className="text-lg font-medium">Actions by Platforms</h3>
-                <p className="text-4xl font-bold text-pink-500">15</p>
-              </div>
+            <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center">
+              <h3 className="text-lg  font-semibold mb-4">
+                Actions by Platforms
+              </h3>
+              <p className="text-6xl max-[450px]:text-3xl font-bold text-pink-500">
+                15
+              </p>
             </div>
           </div>
-        </main>
-      </div>
-    </>
+        </div>
+      </main>
+    </div>
   );
 }

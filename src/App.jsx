@@ -2,9 +2,9 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
-    <>
+    <div className="bg-gray-900">
       <Dashboard />
-    </>
+    </div>
   );
 }
 
