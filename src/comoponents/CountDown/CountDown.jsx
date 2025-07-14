@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RxCountdownTimer } from "react-icons/rx";
+import { AiFillHourglass } from "react-icons/ai";
 
 export default function CountDown() {
   const electionDate = new Date("2025-12-01");
@@ -21,12 +21,16 @@ export default function CountDown() {
 
   return (
     <div className="bg-gray-800 rounded-lg p-6 h-full flex flex-col items-center justify-center text-white">
-      <h2 className="text-xl font-semibold mb-4">Election Countdown</h2>
+      <h2 className="text-xl font-semibold mb-4 text-center">
+        Election Countdown
+      </h2>
 
       <div className="flex items-center gap-4">
-        <RxCountdownTimer className="text-6xl text-gray-300 animate-spin-slow" />
+        <AiFillHourglass className="text-6xl text-gray-300 animate-spin-slow" />
         <div className="text-center">
-          <p className="text-8xl font-bold leading-none">{daysLeft}</p>
+          <p className="text-8xl max-[1025px]:text-6xl font-bold leading-none">
+            {daysLeft}
+          </p>
           <p className="text-2xl mt-2">Days Left</p>
         </div>
       </div>
