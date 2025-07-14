@@ -35,7 +35,7 @@ export default function Dashboard() {
     <div className="flex min-h-screen bg-gray-900 text-white">
       <Sidebar />
 
-      <main className="flex-1 p-6 space-y-6">
+      <main className="flex-1 p-6 space-y-6 max-[915px]:mt-12">
         <h1 className="text-3xl max-[825px]:text-lg font-bold text-center">
           Online Gender-Based Violence Against Female Election Candidates
         </h1>

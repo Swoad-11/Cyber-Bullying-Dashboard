@@ -13,13 +13,20 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`min-h-screen bg-gray-800 text-white transition-all duration-300 z-10 ${
-        collapsed ? "w-16" : "w-64"
-      } flex flex-col ${collapsed ? "items-center" : ""} ${
-        collapsed ? "" : "max-[930px]:fixed"
-      }`}
+      className={`
+        bg-gray-800 text-white z-50 transition-all duration-300
+        ${
+          collapsed
+            ? "max-[915px]:h-14 w-full flex max-[915px]:fixed top-0 left-0"
+            : "max-[915px]:fixed top-0 left-0 min-h-screen w-64 flex-col"
+        }
+         min-[915px]:min-h-screen min-[915px]:flex-col
+        ${collapsed ? "min-[915px]:w-16" : "min-[915px]:w-64"}
+      `}
     >
-      <div className="flex justify-end p-4">
+      <div
+        className={`flex ${collapsed ? "justify-center" : "justify-end"} p-4`}
+      >
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="text-gray-400 hover:text-white"
@@ -33,7 +40,9 @@ export default function Sidebar() {
       </div>
 
       <div
-        className={`flex flex-col space-y-2 ${collapsed ? "items-center" : ""}`}
+        className={`flex gap-4 max-[915px]:justify-center min-[915px]:gap-0 min-[915px]:flex-col min-[915px]:space-y-2 w-full min-[915px]:w-auto ${
+          collapsed ? "items-center" : "flex-col"
+        }`}
       >
         <MenuItem
           icon={<FaChartBar />}
@@ -69,7 +78,9 @@ function MenuItem({ icon, label, collapsed }) {
   return (
     <a
       href="#"
-      className="flex items-center p-3 rounded hover:bg-gray-700 w-full"
+      className={`flex items-center p-3 rounded hover:bg-gray-700 transition-colors ${
+        collapsed ? "justify-center" : ""
+      }`}
     >
       <div className="text-blue-400">{icon}</div>
       {!collapsed && <span className="ml-3">{label}</span>}
