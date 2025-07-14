@@ -9,7 +9,7 @@ import {
 import { RiSidebarFoldFill, RiSidebarUnfoldFill } from "react-icons/ri";
 
 export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
     <aside
