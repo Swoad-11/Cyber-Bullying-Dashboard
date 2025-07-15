@@ -7,6 +7,7 @@ import {
   FaShieldAlt,
 } from "react-icons/fa";
 import { RiSidebarFoldFill, RiSidebarUnfoldFill } from "react-icons/ri";
+import { NavLink } from "react-router";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(true);
@@ -44,31 +45,41 @@ export default function Sidebar() {
           collapsed ? "items-center" : "flex-col"
         }`}
       >
-        <MenuItem
-          icon={<FaChartBar />}
-          label="Overview"
-          collapsed={collapsed}
-        />
-        <MenuItem
-          icon={<FaUsers />}
-          label="Female Candidates"
-          collapsed={collapsed}
-        />
-        <MenuItem
-          icon={<FaExclamationTriangle />}
-          label="Violence Reports"
-          collapsed={collapsed}
-        />
-        <MenuItem
-          icon={<FaLandmark />}
-          label="Party Analytics"
-          collapsed={collapsed}
-        />
-        <MenuItem
-          icon={<FaShieldAlt />}
-          label="Actions Taken"
-          collapsed={collapsed}
-        />
+        <NavLink to="/">
+          <MenuItem
+            icon={<FaChartBar />}
+            label="Overview"
+            collapsed={collapsed}
+          />
+        </NavLink>
+        <NavLink to="/female-candidates">
+          <MenuItem
+            icon={<FaUsers />}
+            label="Female Candidates"
+            collapsed={collapsed}
+          />
+        </NavLink>
+        <NavLink to="/violence-reports">
+          <MenuItem
+            icon={<FaExclamationTriangle />}
+            label="Violence Reports"
+            collapsed={collapsed}
+          />
+        </NavLink>
+        <NavLink to="/party-analytics">
+          <MenuItem
+            icon={<FaLandmark />}
+            label="Party Analytics"
+            collapsed={collapsed}
+          />
+        </NavLink>
+        <NavLink to="/actions-taken">
+          <MenuItem
+            icon={<FaShieldAlt />}
+            label="Actions Taken"
+            collapsed={collapsed}
+          />
+        </NavLink>
       </div>
     </aside>
   );

@@ -1,4 +1,3 @@
-import Sidebar from "../../comoponents/Sidebar/Sidebar";
 import BangladeshMap from "../../comoponents/Heatmap/BangladeshMap";
 import PartyBar from "../../comoponents/Charts/PartyBar";
 import PlatformBar from "../../comoponents/Charts/PlatformBar";
@@ -19,7 +18,7 @@ import {
 } from "chart.js";
 import TargetedCandidates from "../../comoponents/Table/TargetedCandidates";
 
-export default function Dashboard() {
+export default function Overview() {
   ChartJS.register(
     BarElement,
     LineElement,
@@ -31,10 +30,10 @@ export default function Dashboard() {
     Legend,
     Title
   );
-  return (
-    <div className="flex min-h-screen bg-gray-900 text-white">
-      <Sidebar />
 
+  return (
+    <>
+      <title>Dashboard | Overview</title>
       <main className="flex-1 p-6 space-y-6 max-[915px]:mt-12">
         <h1 className="text-3xl max-[825px]:text-lg font-bold text-center">
           Online Gender-Based Violence Against Female Election Candidates
@@ -80,6 +79,6 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }
