@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function ProfileModal({ selectedCandidate }) {
+export default function ProfileModal({
+  selectedCandidate,
+  setSelectedCandidate,
+}) {
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">

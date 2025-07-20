@@ -5,6 +5,7 @@ import {
   FaExclamationTriangle,
   FaLandmark,
   FaShieldAlt,
+  FaMapMarkedAlt,
 } from "react-icons/fa";
 import { RiSidebarFoldFill, RiSidebarUnfoldFill } from "react-icons/ri";
 import { NavLink } from "react-router";
@@ -56,6 +57,13 @@ export default function Sidebar() {
           <MenuItem
             icon={<FaUsers />}
             label="Female Candidates"
+            collapsed={collapsed}
+          />
+        </NavLink>
+        <NavLink to="/division-overview">
+          <MenuItem
+            icon={<FaMapMarkedAlt />}
+            label="Division Overview"
             collapsed={collapsed}
           />
         </NavLink>

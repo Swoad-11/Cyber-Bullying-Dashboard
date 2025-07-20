@@ -5,6 +5,7 @@ import FemaleCandidates from "../pages/FemaleCandidates/FemaleCandidates";
 import ViolenceReports from "../pages/ViolenceReports/ViolenceReports";
 import PartyAnalytics from "../pages/PartyAnalytics/PartyAnalytics";
 import ActionsTaken from "../pages/ActionsTaken/ActionsTaken";
+import DivisionOverview from "../pages/DivisionOverview/DivisionOverview";
 
 const routes = [
   {
@@ -13,6 +14,7 @@ const routes = [
     children: [
       { index: true, path: "/", Component: Overview },
       { path: "/female-candidates", Component: FemaleCandidates },
+      { path: "/division-overview", Component: DivisionOverview },
       {
         path: "/violence-reports",
         Component: ViolenceReports,

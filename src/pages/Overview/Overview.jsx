@@ -45,7 +45,7 @@ export default function Overview() {
             <CountDown />
           </div>
           <div className="md:col-span-2">
-            <BangladeshMap />
+            <TargetedCandidates />
           </div>
         </div>
 
@@ -58,7 +58,6 @@ export default function Overview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <TargetedCandidates />
           <div className="grid grid-cols-2 gap-2 text-center">
             <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center">
               <h3 className="text-lg font-semibold mb-4">

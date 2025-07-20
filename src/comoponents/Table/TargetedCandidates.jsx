@@ -34,9 +34,9 @@ export default function TargetedCandidates() {
 
   return (
     <>
-      <div className="bg-gray-800 rounded-lg shadow p-4">
+      <div className="bg-gray-800 rounded-lg shadow p-4 min-h-full">
         <h2 className="text-xl font-semibold mb-2">Targeted Candidates</h2>
-        <div className="max-h-46 overflow-x-auto custom-scrollbar">
+        <div className="overflow-x-auto custom-scrollbar h-full">
           <table className="min-w-full divide-y-2 divide-gray-200">
             <thead className="sticky top-0 bg-gray-800 ltr:text-left rtl:text-right">
               <tr className="*:font-medium *:text-white">

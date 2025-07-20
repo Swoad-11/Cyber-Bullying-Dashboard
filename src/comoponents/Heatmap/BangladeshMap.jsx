@@ -25,8 +25,8 @@ export default function BangladeshMap() {
   const hoverColor = "#609078";
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6 text-white">
-      <h2 className="text-xl font-semibold text-center mb-2.5">
+    <div className="p-6 text-white max-[915px]:mt-18 min-[915px]:mt-6 min-[915px]:w-3xl mx-auto">
+      <h2 className="text-xl font-semibold text-center mb-6">
         Female Candidates by Division
       </h2>
       <div className="order-1 lg:order-2 w-full lg:w-2/3 mx-auto">
