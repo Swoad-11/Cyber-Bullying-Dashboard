@@ -30,11 +30,11 @@ export default function FemaleCandidates() {
   return (
     <>
       <title> Dashboard | Female Candidates </title>
-      <div className="overflow-x-auto custom-scrollbar max-[915px]:mt-18 min-[915px]:mt-6 mx-auto p-4">
+      <div className="overflow-x-auto custom-scrollbar max-[915px]:mt-18 min-[915px]:mt-6 min-[915px]:w-4xl mx-auto p-4">
         <h2 className="text-xl text-center font-semibold mb-4">
           Participating Female Election Candidates
         </h2>
-        <table className="mx-auto divide-y-2 divide-gray-200 rounded-lg">
+        <table className="mx-auto divide-y-2 divide-gray-200 rounded-lg min-[915px]:w-4xl">
           <thead className="sticky top-0 bg-gray-800 ltr:text-left rtl:text-right">
             <tr className="*:font-medium *:text-white text-center">
               <th className="px-6 py-4 whitespace-nowrap">#</th>
