@@ -17,6 +17,7 @@ import {
 } from "chart.js";
 import TargetedCandidates from "../../comoponents/Table/TargetedCandidates";
 import AbuseBarChart from "../../comoponents/Charts/AbuseBarChart";
+import ActionsTaken from "../../comoponents/ActionsTaken/ActionsTaken";
 
 export default function Overview() {
   ChartJS.register(
@@ -50,34 +51,30 @@ export default function Overview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <BullyingDoughnut />
             <PlatformBar />
           </div>
           <TacticsBar />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-          <div className="bg-gray-800 rounded-lg p-4 md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+          <div className="bg-gray-800 rounded-lg p-4">
             <AbuseBarChart />
           </div>
-          <div className="grid gap-4">
-            <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center">
-              <h3 className="text-lg font-semibold mb-4">
-                Actions by Government
-              </h3>
-              <p className="text-6xl max-[450px]:text-3xl font-bold text-pink-500">
-                6
-              </p>
-            </div>
-            <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center">
-              <h3 className="text-lg  font-semibold mb-4">
-                Actions by Platforms
-              </h3>
-              <p className="text-6xl max-[450px]:text-3xl font-bold text-pink-500">
-                15
-              </p>
-            </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <ActionsTaken
+              title={"Government Response"}
+              total={21}
+              actionsTaken={7}
+              noAction={14}
+            />
+            <ActionsTaken
+              title={"Platform Response"}
+              total={30}
+              actionsTaken={17}
+              noAction={13}
+            />
           </div>
         </div>
       </main>
