@@ -95,7 +95,7 @@ export default function Sidebar() {
 
 function MenuItem({ icon, label, collapsed }) {
   return (
-    <a
+    <button
       href="#"
       className={`flex items-center p-3 rounded hover:bg-gray-700 transition-colors ${
         collapsed ? "justify-center" : ""
@@ -103,6 +103,6 @@ function MenuItem({ icon, label, collapsed }) {
     >
       <div className="text-blue-400">{icon}</div>
       {!collapsed && <span className="ml-3">{label}</span>}
-    </a>
+    </button>
   );
 }
