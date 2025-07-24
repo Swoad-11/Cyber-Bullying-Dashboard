@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { TbMessageReportFilled } from "react-icons/tb";
 import femaleCandidates from "../../assets/candidate";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ReportButton() {
   const [showModal, setShowModal] = useState(false);
@@ -14,6 +16,8 @@ export default function ReportButton() {
   const [candidateName, setCandidateName] = useState("");
   const [constituency, setConstituency] = useState("");
   const [party, setParty] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCandidateChange = (e) => {
     const name = e.target.value;
@@ -31,11 +35,12 @@ export default function ReportButton() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!platform || !url) {
-      setError("Please fill in both fields.");
+    if (!platform || !url || !candidateName) {
+      setError("Please fill in all required fields.");
       return;
     }
 
+    setIsSubmitting(true);
     setError("");
     const formData = new FormData();
     formData.append("candidateName", candidateName);
@@ -53,7 +58,7 @@ export default function ReportButton() {
     )
       .then((res) => res.json())
       .then((result) => {
-        alert("Thank you for your report!");
+        toast.success("Report submitted successfully!");
         setCandidateName("");
         setConstituency("");
         setParty("");
@@ -63,7 +68,7 @@ export default function ReportButton() {
       })
       .catch((err) => {
         console.error("Error submitting form:", err);
-        alert("Failed to submit. Try again later.");
+        toast.error(`Error: ${result.message || "Submission failed."}`);
       });
   };
 
@@ -85,7 +90,10 @@ export default function ReportButton() {
 
       <button
         className="fixed text-4xl bottom-10 right-10 z-50 bg-red-400 text-white p-2 rounded-full shadow-lg hover:bg-red-500 transition"
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          setIsSubmitting(false);
+          setShowModal(true);
+        }}
       >
         <TbMessageReportFilled />
       </button>
@@ -94,7 +102,10 @@ export default function ReportButton() {
         <div className="fixed mx-auto inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
           <div className="bg-gray-500 p-6 rounded-lg shadow-md max-w-md relative w-[350px] min-[765px]:w-[550px]">
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() => {
+                setIsSubmitting(false);
+                setShowModal(false);
+              }}
               className="absolute top-3 right-4 text-red-300 hover:text-red-400"
             >
               ✕
@@ -183,17 +194,45 @@ export default function ReportButton() {
 
               <button
                 type="submit"
-                className={`w-full bg-blue-600 text-white font-bold py-2 rounded ${
-                  !platform || !url ? "opacity-50 cursor-not-allowed" : ""
+                className={`w-full bg-blue-600 text-white font-bold py-2 rounded flex items-center justify-center gap-2 ${
+                  isSubmitting || !platform || !url
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
                 }`}
-                disabled={!platform || !url}
+                disabled={isSubmitting || !platform || !url}
               >
-                Send
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      ></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  "Send"
+                )}
               </button>
             </form>
           </div>
         </div>
       )}
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );
 }
