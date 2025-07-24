@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { TbMessageReportFilled } from "react-icons/tb";
+import femaleCandidates from "../../assets/candidate";
 
 export default function ReportButton() {
   const [showModal, setShowModal] = useState(false);
   const [showMessage, setShowMessage] = useState(true);
+
   const [platform, setPlatform] = useState("");
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
+
+  // New states for candidate selection
+  const [candidateName, setCandidateName] = useState("");
+  const [constituency, setConstituency] = useState("");
+  const [party, setParty] = useState("");
+
+  const handleCandidateChange = (e) => {
+    const name = e.target.value;
+    setCandidateName(name);
+
+    const candidate = femaleCandidates.find((c) => c.name === name);
+    if (candidate) {
+      setConstituency(candidate.constituency);
+      setParty(candidate.party);
+    } else {
+      setConstituency("");
+      setParty("");
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,11 +37,34 @@ export default function ReportButton() {
     }
 
     setError("");
-    console.log("Sending data:", { platform, url });
-    setPlatform("");
-    setUrl("");
-    setShowModal(false);
-    alert("Thank you for your report!");
+    const formData = new FormData();
+    formData.append("candidateName", candidateName);
+    formData.append("constituency", constituency);
+    formData.append("party", party);
+    formData.append("platform", platform);
+    formData.append("url", url);
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzM3-p1bDUnH4DEuHes-zOW8mG2uaxKHkxTjxeIKmU_SoOu247rpDH9iM4Wi5MKjxSp/exec",
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        alert("Thank you for your report!");
+        setCandidateName("");
+        setConstituency("");
+        setParty("");
+        setPlatform("");
+        setUrl("");
+        setShowModal(false);
+      })
+      .catch((err) => {
+        console.error("Error submitting form:", err);
+        alert("Failed to submit. Try again later.");
+      });
   };
 
   useEffect(() => {
@@ -39,7 +83,6 @@ export default function ReportButton() {
         </div>
       )}
 
-      {/* Floating Button */}
       <button
         className="fixed text-4xl bottom-10 right-10 z-50 bg-red-400 text-white p-2 rounded-full shadow-lg hover:bg-red-500 transition"
         onClick={() => setShowModal(true)}
@@ -47,10 +90,9 @@ export default function ReportButton() {
         <TbMessageReportFilled />
       </button>
 
-      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
-          <div className="bg-gray-500 p-6 rounded-lg shadow-md w-full max-w-md relative">
+        <div className="fixed mx-auto inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+          <div className="bg-gray-500 p-6 rounded-lg shadow-md max-w-md relative w-[350px] min-[765px]:w-[550px]">
             <button
               onClick={() => setShowModal(false)}
               className="absolute top-3 right-4 text-red-300 hover:text-red-400"
@@ -64,6 +106,52 @@ export default function ReportButton() {
 
             {error && <p className="text-red-500 mb-2">{error}</p>}
             <form onSubmit={handleSubmit}>
+              {/* Candidate Name Dropdown */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">
+                  Candidate Name
+                </label>
+                <select
+                  value={candidateName}
+                  onChange={handleCandidateChange}
+                  className="block w-full border border-gray-200 bg-gray-100 rounded p-2 text-gray-500"
+                >
+                  <option value="">Select a candidate...</option>
+                  {femaleCandidates.map((candidate) => (
+                    <option key={candidate.name} value={candidate.name}>
+                      {candidate.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Auto-filled Constituency */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">
+                  Constituency
+                </label>
+                <input
+                  type="text"
+                  value={constituency}
+                  disabled
+                  className="block w-full border border-gray-300 bg-gray-100 rounded p-2 text-gray-700"
+                />
+              </div>
+
+              {/* Auto-filled Party Name */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">
+                  Party Name
+                </label>
+                <input
+                  type="text"
+                  value={party}
+                  disabled
+                  className="block w-full border border-gray-300 bg-gray-100 rounded p-2 text-gray-700"
+                />
+              </div>
+
+              {/* Platform */}
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">
                   Platform
@@ -71,7 +159,7 @@ export default function ReportButton() {
                 <select
                   value={platform}
                   onChange={(e) => setPlatform(e.target.value)}
-                  className="block w-full border border-gray-200 bg-gray-100 rounded p-2 text-gray-500 "
+                  className="block w-full border border-gray-200 bg-gray-100 rounded p-2 text-gray-500"
                 >
                   <option value="">Select...</option>
                   <option value="Facebook">Facebook</option>
@@ -79,17 +167,20 @@ export default function ReportButton() {
                   <option value="TikTok">TikTok</option>
                 </select>
               </div>
+
+              {/* URL */}
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">URL</label>
                 <input
                   type="url"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  className="block w-full border border-gray-300 bg-gray-100 rounded p-2 placeholder-gray-500"
+                  className="block w-full border border-gray-300 bg-gray-100 rounded p-2 placeholder-gray-500 text-gray-500"
                   placeholder="Enter URL"
                   required
                 />
               </div>
+
               <button
                 type="submit"
                 className={`w-full bg-blue-600 text-white font-bold py-2 rounded ${
