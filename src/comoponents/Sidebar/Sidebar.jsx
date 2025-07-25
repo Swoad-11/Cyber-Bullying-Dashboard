@@ -46,42 +46,84 @@ export default function Sidebar() {
           collapsed ? "items-center" : "flex-col"
         }`}
       >
-        <NavLink to="/">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "block rounded bg-gray-600 text-white font-bold"
+              : "block rounded hover:bg-gray-700"
+          }
+        >
           <MenuItem
             icon={<FaChartBar />}
             label="Overview"
             collapsed={collapsed}
           />
         </NavLink>
-        <NavLink to="/female-candidates">
+        <NavLink
+          to="/female-candidates"
+          className={({ isActive }) =>
+            isActive
+              ? "block rounded bg-gray-600 text-white font-bold"
+              : "block rounded hover:bg-gray-700"
+          }
+        >
           <MenuItem
             icon={<FaUsers />}
             label="Female Candidates"
             collapsed={collapsed}
           />
         </NavLink>
-        <NavLink to="/division-overview">
+        <NavLink
+          to="/division-overview"
+          className={({ isActive }) =>
+            isActive
+              ? "block rounded bg-gray-600 text-white font-bold"
+              : "block rounded hover:bg-gray-700"
+          }
+        >
           <MenuItem
             icon={<FaMapMarkedAlt />}
             label="Division Overview"
             collapsed={collapsed}
           />
         </NavLink>
-        <NavLink to="/violence-reports">
+        <NavLink
+          to="/violence-reports"
+          className={({ isActive }) =>
+            isActive
+              ? "block rounded bg-gray-600 text-white font-bold"
+              : "block rounded hover:bg-gray-700"
+          }
+        >
           <MenuItem
             icon={<FaExclamationTriangle />}
             label="Violence Reports"
             collapsed={collapsed}
           />
         </NavLink>
-        <NavLink to="/party-analytics">
+        <NavLink
+          to="/party-analytics"
+          className={({ isActive }) =>
+            isActive
+              ? "block rounded bg-gray-600 text-white font-bold"
+              : "block rounded hover:bg-gray-700"
+          }
+        >
           <MenuItem
             icon={<FaLandmark />}
             label="Party Analytics"
             collapsed={collapsed}
           />
         </NavLink>
-        <NavLink to="/actions-taken">
+        <NavLink
+          to="/actions-taken"
+          className={({ isActive }) =>
+            isActive
+              ? "block rounded bg-gray-600 text-white font-bold"
+              : "block rounded hover:bg-gray-700"
+          }
+        >
           <MenuItem
             icon={<FaShieldAlt />}
             label="Actions Taken"
@@ -97,7 +139,7 @@ function MenuItem({ icon, label, collapsed }) {
   return (
     <button
       href="#"
-      className={`flex items-center p-3 rounded hover:bg-gray-700 transition-colors ${
+      className={`flex items-center p-3 rounded transition-colors ${
         collapsed ? "justify-center" : ""
       }`}
     >

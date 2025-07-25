@@ -27,17 +27,15 @@ export default function DivisionOverview() {
   return (
     <>
       <title>Dashboard | Division Overview</title>
-      <div className="p-6 space-y-6">
+      <div className="p-6 space-y-6 mx-auto">
         <h1 className="text-3xl font-bold text-center text-white">
           Division-wise Female Candidates
         </h1>
+        <BangladeshMap />
+        {/*<div className="grid grid-cols-2 gap-16">
+           <div className="w-2xl"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="w-full">
-            <BangladeshMap />
-          </div>
-
-          <div className="bg-gray-800 rounded-lg p-6 text-white">
+          <div className="bg-gray-800 rounded-lg p-6 text-white ">
             <h2 className="text-xl font-semibold mb-4">
               Candidates by Division
             </h2>
@@ -71,8 +69,8 @@ export default function DivisionOverview() {
                 )
               )}
             </div>
-          </div>
-        </div>
+          </div> 
+        </div>*/}
       </div>
     </>
   );
