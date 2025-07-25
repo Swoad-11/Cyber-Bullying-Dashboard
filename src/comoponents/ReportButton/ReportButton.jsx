@@ -14,6 +14,7 @@ export default function ReportButton() {
 
   // New states for candidate selection
   const [candidateName, setCandidateName] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [constituency, setConstituency] = useState("");
   const [party, setParty] = useState("");
 
@@ -117,23 +118,65 @@ export default function ReportButton() {
 
             {error && <p className="text-red-500 mb-2">{error}</p>}
             <form onSubmit={handleSubmit}>
-              {/* Candidate Name Dropdown */}
-              <div className="mb-4">
+              {/* Candidate Name Input Field */}
+              <div className="mb-4 relative">
                 <label className="block text-sm font-medium mb-1">
                   Candidate Name
                 </label>
-                <select
+                <input
+                  type="text"
                   value={candidateName}
-                  onChange={handleCandidateChange}
-                  className="block w-full border border-gray-200 bg-gray-100 rounded p-2 text-gray-500"
-                >
-                  <option value="">Select a candidate...</option>
-                  {femaleCandidates.map((candidate) => (
-                    <option key={candidate.name} value={candidate.name}>
-                      {candidate.name}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setCandidateName(value);
+                    setShowSuggestions(true);
+
+                    // Clear autofilled values if not matched exactly
+                    const matched = femaleCandidates.find(
+                      (c) => c.name.toLowerCase() === value.toLowerCase()
+                    );
+                    if (matched) {
+                      setConstituency(matched.constituency);
+                      setParty(matched.party);
+                    } else {
+                      setConstituency("");
+                      setParty("");
+                    }
+                  }}
+                  onFocus={() => {
+                    if (candidateName) setShowSuggestions(true);
+                  }}
+                  className="block w-full border border-gray-300 bg-gray-100 rounded p-2 text-gray-700"
+                  placeholder="Type candidate name..."
+                  autoComplete="off"
+                />
+
+                {showSuggestions && candidateName && (
+                  <ul className="absolute z-10 bg-gray-100 border text-black w-full rounded mt-1 max-h-40 overflow-y-auto shadow">
+                    {femaleCandidates
+                      .filter((c) =>
+                        c.name
+                          .toLowerCase()
+                          .includes(candidateName.toLowerCase())
+                      )
+                      .slice(0, 5)
+                      .map((c) => (
+                        <li
+                          key={c.name}
+                          onMouseDown={() => {
+                            // use onMouseDown instead of onClick to fire before blur
+                            setCandidateName(c.name);
+                            setConstituency(c.constituency);
+                            setParty(c.party);
+                            setShowSuggestions(false);
+                          }}
+                          className="px-3 py-2 hover:bg-blue-300 cursor-pointer text-sm"
+                        >
+                          {c.name}
+                        </li>
+                      ))}
+                  </ul>
+                )}
               </div>
 
               {/* Auto-filled Constituency */}
