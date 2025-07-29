@@ -34,7 +34,6 @@ export default function ViolenceReports() {
                 <th className="p-3">Platform</th>
                 <th className="p-3">Date of Post</th>
                 <th className="p-3">Type of TFGBV</th>
-                <th className="p-3">Severity</th>
                 <th className="p-3">Actions</th>
               </tr>
             </thead>
@@ -45,7 +44,6 @@ export default function ViolenceReports() {
                   <td className="p-3">{report.platform}</td>
                   <td className="p-3">{report.date}</td>
                   <td className="p-3">{report.type}</td>
-                  <td className="p-3">{report.severity}</td>
                   <td className="p-3">
                     <button
                       className="px-3 py-1.5 text-sm font-medium  transition-colors  focus:relative text-gray-200 bg-gray-700 hover:text-white rounded-sm"
