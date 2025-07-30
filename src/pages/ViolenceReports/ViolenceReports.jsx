@@ -1,23 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ReportModal from "../../comoponents/ReportModal/ReportModal";
-
-const reports = [
-  {
-    id: 1,
-    candidateName: "Sabina Yasmin",
-    platform: "Facebook",
-    date: "2025-07-01",
-    type: "Slut-shaming",
-    description: "Inappropriate comments made on public post.",
-    keywords: ["shame", "disgusting"],
-    screenshot: "/screenshot1.png",
-    postLink: "https://facebook.com/example",
-    archiveLink: "https://archive.org/example",
-  },
-];
+import { ReportsContext } from "../../comoponents/Provider/ReportProvider";
 
 export default function ViolenceReports() {
+  const { reports, loading } = useContext(ReportsContext);
   const [selectedReport, setSelectedReport] = useState(null);
+
   return (
     <>
       <title>Dashboard | Violence Reports </title>
@@ -37,24 +25,38 @@ export default function ViolenceReports() {
                 <th className="p-3">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-800">
-              {reports.map((report) => (
-                <tr key={report.id} className="hover:bg-neutral-600">
-                  <td className="p-3">{report.candidateName}</td>
-                  <td className="p-3">{report.platform}</td>
-                  <td className="p-3">{report.date}</td>
-                  <td className="p-3">{report.type}</td>
-                  <td className="p-3">
-                    <button
-                      className="px-3 py-1.5 text-sm font-medium  transition-colors  focus:relative text-gray-200 bg-gray-700 hover:text-white rounded-sm"
-                      onClick={() => setSelectedReport(report)}
-                    >
-                      See Details
-                    </button>
+            {loading ? (
+              <tbody>
+                <tr>
+                  <td colSpan="5" className="text-center p-4 text-gray-400">
+                    Loading reports...
                   </td>
                 </tr>
-              ))}
-            </tbody>
+              </tbody>
+            ) : (
+              <tbody className="divide-y divide-gray-800">
+                {reports.map((report, index) => (
+                  <tr key={index} className="hover:bg-neutral-600">
+                    <td className="p-3">{report.Candidate_Name}</td>
+                    <td className="p-3">{report.Platform}</td>
+                    <td className="p-3">
+                      {new Date(report.Date_of_Post).toLocaleDateString(
+                        "en-GB"
+                      )}
+                    </td>
+                    <td className="p-3">{report.Type_of_TFGBV}</td>
+                    <td className="p-3">
+                      <button
+                        className="px-3 py-1.5 text-sm font-medium transition-colors focus:relative text-gray-200 bg-gray-700 hover:text-white rounded-sm"
+                        onClick={() => setSelectedReport(report)}
+                      >
+                        See Details
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </table>
         </div>
 
