@@ -18,8 +18,14 @@ import {
 import TargetedCandidates from "../../comoponents/Table/TargetedCandidates";
 import AbuseBarChart from "../../comoponents/Charts/AbuseBarChart";
 import ActionsTaken from "../../comoponents/ActionsTaken/ActionsTaken";
+import { ReportsContext } from "../../comoponents/Provider/ReportProvider";
+import { useContext } from "react";
 
 export default function Overview() {
+  const { reports, loading } = useContext(ReportsContext);
+
+  console.log(reports);
+
   ChartJS.register(
     BarElement,
     LineElement,
@@ -46,7 +52,7 @@ export default function Overview() {
             <CountDown />
           </div>
           <div className="md:col-span-2">
-            <TargetedCandidates />
+            <TargetedCandidates reports={reports} />
           </div>
         </div>
 

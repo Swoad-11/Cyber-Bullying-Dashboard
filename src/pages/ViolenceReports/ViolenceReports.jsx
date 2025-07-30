@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import ReportModal from "../../comoponents/ReportModal/ReportModal";
 import { ReportsContext } from "../../comoponents/Provider/ReportProvider";
+import { BeatLoader } from "react-spinners";
 
 export default function ViolenceReports() {
   const { reports, loading } = useContext(ReportsContext);
@@ -28,8 +29,13 @@ export default function ViolenceReports() {
             {loading ? (
               <tbody>
                 <tr>
-                  <td colSpan="5" className="text-center p-4 text-gray-400">
-                    Loading reports...
+                  <td colSpan={5}>
+                    <div className="flex justify-center items-center py-10">
+                      <span className="text-3xl text-gray-400 mr-6">
+                        Loading reports
+                      </span>
+                      <BeatLoader />
+                    </div>
                   </td>
                 </tr>
               </tbody>

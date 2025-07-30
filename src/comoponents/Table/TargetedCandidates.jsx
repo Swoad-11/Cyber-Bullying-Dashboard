@@ -1,36 +1,34 @@
-export default function TargetedCandidates() {
-  const data = [
-    {
-      name: "Rumeen Farhana",
-      party: "BNP",
-      constituency: "Comilla",
-      platform: "Facebook",
-    },
-    {
-      name: "Tasmia Mahmood",
-      party: "AL",
-      constituency: "Mymensingh",
-      platform: "Twitter",
-    },
-    {
-      name: "Saleha Akhtar",
-      party: "Jatiya Party",
-      constituency: "Dhaka-19",
-      platform: "Twitter",
-    },
-    {
-      name: "Nusrat Jahan",
-      party: "BNP",
-      constituency: "Chattogram-8",
-      platform: "Facebook",
-    },
-    {
-      name: "Nabila Sultana",
-      party: "AL",
-      constituency: "Rajshahi-2",
-      platform: "Twitter",
-    },
-  ];
+import { NavLink } from "react-router";
+
+export default function TargetedCandidates({ reports }) {
+  // Step 1: Count reports by candidate
+  const candidateCounts = reports.reduce((acc, report) => {
+    const name = report.Candidate_Name;
+    if (!acc[name]) {
+      acc[name] = {
+        count: 0,
+        party: report.Political_Party || "N/A", // adjust keys if needed
+        constituency: report.Constituency || "N/A",
+        platform: report.Platform || "N/A",
+      };
+    }
+    acc[name].count += 1;
+    return acc;
+  }, {});
+
+  // Step 2: Convert to array and sort by count descending
+  const sortedCandidates = Object.entries(candidateCounts)
+    .map(([name, info]) => ({
+      name,
+      party: info.party,
+      constituency: info.constituency,
+      platform: info.platform,
+      count: info.count,
+    }))
+    .sort((a, b) => b.count - a.count);
+
+  // Step 3: Pick top 5 (or any number)
+  const topCandidates = sortedCandidates.slice(0, 5);
 
   return (
     <>
@@ -48,7 +46,7 @@ export default function TargetedCandidates() {
             </thead>
 
             <tbody className="divide-y divide-gray-200">
-              {data.map((item, idx) => (
+              {topCandidates.map((item, idx) => (
                 <tr key={idx} className="*:text-gray-200 *:first:font-medium">
                   <td className="px-3 py-2 whitespace-nowrap">{item.name}</td>
                   <td className="px-3 py-2 whitespace-nowrap">{item.party}</td>
@@ -62,6 +60,12 @@ export default function TargetedCandidates() {
               ))}
             </tbody>
           </table>
+          <NavLink
+            to="/violence-reports"
+            className="mt-8 inline-flex items-center gap-2 rounded-sm border border-indigo-600 bg-indigo-600 px-8 py-3 text-white hover:bg-transparent focus:ring-3 focus:outline-hidden"
+          >
+            <span className="text-sm font-medium"> See More </span>
+          </NavLink>
         </div>
       </div>
     </>

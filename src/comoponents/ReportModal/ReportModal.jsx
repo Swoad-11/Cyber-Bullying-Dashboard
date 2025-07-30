@@ -1,7 +1,4 @@
-import React from "react";
-
 export default function ReportModal({ selectedReport, setSelectedReport }) {
-  console.log(selectedReport);
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
@@ -11,6 +8,10 @@ export default function ReportModal({ selectedReport, setSelectedReport }) {
           </h2>
 
           <div className="space-y-2">
+            <p>
+              <span className="font-semibold">Constituency:</span>{" "}
+              {selectedReport.Constituency}
+            </p>
             <p>
               <span className="font-semibold">Platform:</span>{" "}
               {selectedReport.Platform}
