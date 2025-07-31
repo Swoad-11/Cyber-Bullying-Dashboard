@@ -8,18 +8,18 @@ export function ReportProvider({ children }) {
 
   useEffect(() => {
     const fetchReports = () => {
-      fetch("/api/reports")
+      fetch("https://tfgbv-data.onrender.com/api/reports")
         .then((res) => {
           if (!res.ok) throw new Error("Failed to fetch");
           return res.json();
         })
         .then((data) => {
           setReports(data);
-          setLoading(false); // ✅ turn off loading after data is received
+          setLoading(false);
         })
         .catch((err) => {
           console.error("Failed to fetch reports:", err);
-          setLoading(false); // ✅ also turn it off on error
+          setLoading(false);
         });
     };
 
