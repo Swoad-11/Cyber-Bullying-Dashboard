@@ -23,7 +23,7 @@ export function ReportProvider({ children }) {
         });
     };
 
-    fetchReports(); // initial load
+    fetchReports();
 
     const intervalId = setInterval(fetchReports, 15000); // refresh every 15s
 
