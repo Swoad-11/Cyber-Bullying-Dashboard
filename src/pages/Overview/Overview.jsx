@@ -52,7 +52,7 @@ export default function Overview() {
             <CountDown />
           </div>
           <div className="md:col-span-2">
-            <TargetedCandidates reports={reports} />
+            <TargetedCandidates reports={reports} loading={loading} />
           </div>
         </div>
 

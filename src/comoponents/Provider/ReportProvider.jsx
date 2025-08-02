@@ -8,7 +8,7 @@ export function ReportProvider({ children }) {
 
   useEffect(() => {
     const fetchReports = () => {
-      fetch("https://tfgbv-data.onrender.com/api/reports")
+      fetch("https://tfgbv-data.vercel.app/api/reports")
         .then((res) => {
           if (!res.ok) throw new Error("Failed to fetch");
           return res.json();

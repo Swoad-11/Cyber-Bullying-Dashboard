@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AiFillHourglass } from "react-icons/ai";
 
 export default function CountDown() {
-  const electionDate = new Date("2025-12-01");
+  const electionDate = new Date("2026-1-31");
   const [daysLeft, setDaysLeft] = useState(0);
 
   useEffect(() => {
