@@ -34,6 +34,31 @@ const femaleCandidates = [
     constituency: "Rajshahi-2",
     party: "Independent",
   },
+  {
+    name: "Fatima Tasnim Zuma",
+    constituency: "DUCSU",
+    party: "Shibir",
+  },
+  {
+    name: "Umama Fatema",
+    constituency: "DUCSU",
+    party: "Independent",
+  },
+  {
+    name :"Hema Chakma",
+    constituency: "DUCSU",
+    party: "Independent",
+  },
+  {
+    name: "B M Fahmida Alam ",
+    constituency: "DUCSU",
+    party: "Independent",
+  },
+  {
+    name: "Sk Tasnim Afroz Emi",
+    constituency: "DUCSU",
+    party: "Independent",
+  }
 ];
 
 export default femaleCandidates;

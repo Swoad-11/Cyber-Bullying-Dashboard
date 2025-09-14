@@ -218,6 +218,7 @@ export default function ReportButton() {
                   <option value="">Select...</option>
                   <option value="Facebook">Facebook</option>
                   <option value="Twitter">Twitter</option>
+                  <option value="YouTube">YouTube</option>
                   <option value="TikTok">TikTok</option>
                 </select>
               </div>
